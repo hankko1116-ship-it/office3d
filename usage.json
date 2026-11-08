@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08 14:09",
+  "generatedAt": "2026-11-08 15:45",
   "note": "token 數含快取讀取；7 天＝產生時間往前 7×24 小時；今天＝台北時間 0 點起",
   "gpt": {
     "label": "GPT",
@@ -27,30 +27,30 @@
   "claude": {
     "label": "Claude",
     "source": "Claude Code 本機紀錄",
-    "asOf": "2026-11-08 14:09",
+    "asOf": "2026-11-08 15:45",
     "limits": null,
-    "tokensToday": 71480380,
-    "tokens7d": 660179349,
-    "output7d": 2467567,
-    "calls7d": 2454
+    "tokensToday": 93330734,
+    "tokens7d": 682029703,
+    "output7d": 2550030,
+    "calls7d": 2565
   },
   "grok": {
     "label": "Grok",
     "member": "linyixuan",
     "source": "手動核對（Grok 方案用量頁）",
-    "asOf": "2026-11-08 14:13",
+    "asOf": "2026-11-08 15:40",
     "plan": "Premium",
     "limits": {
       "week": {
-        "usedPercent": 86.4,
+        "usedPercent": 87.4,
         "resetsAt": "2026-11-11 14:05",
-        "resetPassed": false,
         "sharedWithOtherApps": true,
-        "note": "每週上限與方案裡的其他應用共用，不是只有 Grok Bot"
+        "note": "每週上限與方案裡的其他應用共用，不是只有 Grok Bot",
+        "resetPassed": false
       }
     },
-    "grokBotShareOfUsedPercent": 81.8,
+    "grokBotShareOfUsedPercent": 82.6,
     "linyixuanShareOfGrokBotPercent": 77,
-    "note": "86.4% 是整個方案本週額度已使用；其中 81.8% 是 Grok Bot 用的；只算機器人「林怡瑄」時，她佔本週 Grok Bot 用量的 77%。時間為台北時間"
+    "note": "87.4% 是整個方案本週額度已使用；其中 82.6% 是 Grok Bot 用的；只算機器人「林怡瑄」時，她佔本週 Grok Bot 用量的 77%。時間為台北時間"
   }
 }

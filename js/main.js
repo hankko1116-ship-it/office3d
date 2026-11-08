@@ -350,7 +350,7 @@
           }
           v.set(a.x, 2.3 + rigs[a.id].cur.figY, a.z).project(camera);
           show = v.z < 1 && Math.abs(v.x) < 1.1 && Math.abs(v.y) < 1.1;
-          if (show) b.el.style.transform = 'translate(' + ((v.x * 0.5 + 0.5) * W).toFixed(1) + 'px,' + ((-v.y * 0.5 + 0.5) * H).toFixed(1) + 'px) translate(-50%,-100%)';
+          if (show) b.el.style.transform = 'translate(' + ((v.x * 0.5 + 0.5) * W).toFixed(1) + 'px,' + ((-v.y * 0.5 + 0.5) * H).toFixed(1) + 'px) translate(-50%,-100%)' + (b.lift ? ' translateY(-' + b.lift + 'px)' : '');
         }
         if (show !== b.shown) {
           b.el.style.display = show ? 'block' : 'none';

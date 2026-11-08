@@ -33,5 +33,24 @@
     "tokens7d": 660179349,
     "output7d": 2467567,
     "calls7d": 2454
+  },
+  "grok": {
+    "label": "Grok",
+    "member": "linyixuan",
+    "source": "手動核對（Grok 方案用量頁）",
+    "asOf": "2026-11-08 14:13",
+    "plan": "Premium",
+    "limits": {
+      "week": {
+        "usedPercent": 86.4,
+        "resetsAt": "2026-11-11 14:05",
+        "resetPassed": false,
+        "sharedWithOtherApps": true,
+        "note": "每週上限與方案裡的其他應用共用，不是只有 Grok Bot"
+      }
+    },
+    "grokBotShareOfUsedPercent": 81.8,
+    "linyixuanShareOfGrokBotPercent": 77,
+    "note": "86.4% 是整個方案本週額度已使用；其中 81.8% 是 Grok Bot 用的；只算機器人「林怡瑄」時，她佔本週 Grok Bot 用量的 77%。時間為台北時間"
   }
 }

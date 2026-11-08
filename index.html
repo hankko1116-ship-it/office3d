@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3D 辦公室</title>
+  <link rel="icon" href="data:,">
+  <!-- Three.js 從 CDN 載入（不需要 build）。importmap 讓 file:// 雙擊也能用。 -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #0b0f1c;
+      font-family: "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", "Heiti TC", sans-serif; }
+    #scene { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+    .panel { position: fixed; background: rgba(18, 20, 28, 0.72); color: #f2f2f5; border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); box-shadow: 0 6px 24px rgba(0,0,0,0.25); }
+    #hud { top: 14px; left: 14px; padding: 10px 14px; }
+    #clock { font-size: 20px; font-weight: 700; letter-spacing: 0.5px; }
+    #phase { font-size: 13px; opacity: 0.85; margin-top: 2px; }
+    #source { font-size: 11px; opacity: 0.6; margin-top: 4px; }
+    #fps { display: none; font-size: 11px; opacity: 0.7; margin-top: 4px; white-space: pre-line; }
+
+    #roster { top: 14px; right: 14px; padding: 8px; width: 200px; }
+    #roster h2 { font-size: 12px; font-weight: 600; opacity: 0.7; margin: 2px 6px 6px; }
+    .member { display: flex; align-items: center; gap: 8px; width: 100%; padding: 6px 8px; border: 0; border-radius: 8px;
+      background: transparent; color: inherit; font: inherit; font-size: 13px; cursor: pointer; text-align: left; }
+    .member:hover { background: rgba(255,255,255,0.08); }
+    .member.active { background: rgba(255,210,74,0.18); }
+    .member .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+    .member .nm { flex: 1; }
+    .member .st { font-size: 11px; opacity: 0.7; }
+
+    #card { left: 14px; bottom: 14px; width: 260px; padding: 14px 16px; transform: translateY(20px); opacity: 0;
+      pointer-events: none; transition: all 0.2s ease; }
+    #card.show { transform: none; opacity: 1; pointer-events: auto; }
+    #card-name { font-size: 20px; font-weight: 700; }
+    #card-role { font-size: 13px; opacity: 0.8; margin-top: 2px; }
+    #card-status { display: inline-block; margin-top: 10px; padding: 2px 10px; border-radius: 999px; font-size: 12px; color: #111; font-weight: 600; }
+    #card dl { margin: 10px 0 0; font-size: 13px; }
+    #card dt { opacity: 0.6; font-size: 11px; margin-top: 8px; }
+    #card dd { margin: 2px 0 0; }
+    #card-close { position: absolute; top: 8px; right: 10px; background: none; border: 0; color: #fff; opacity: 0.6;
+      font-size: 18px; cursor: pointer; }
+
+    #bubbles { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
+    .bubble { position: absolute; left: 0; top: 0; max-width: 170px; padding: 5px 9px; background: #ffffff; color: #222;
+      border-radius: 10px; font-size: 12px; line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25); will-change: transform; }
+    .bubble::after { content: ""; position: absolute; left: 50%; bottom: -5px; margin-left: -5px; border: 5px solid transparent;
+      border-bottom: 0; border-top-color: #ffffff; }
+    /* 對話泡泡（聊天、打電動時說的話） */
+    .bubble.say { background: #fff3b0; font-weight: 600; }
+    .bubble.say::after { border-top-color: #fff3b0; }
+
+    #hint { left: 50%; bottom: 14px; transform: translateX(-50%); padding: 6px 12px; font-size: 12px; opacity: 0.85; }
+    #loading { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; color: #dfe3ee;
+      font-size: 15px; background: #0b0f1c; padding: 24px; text-align: center; line-height: 1.6; }
+    #loading.error { color: #ffb4a8; }
+    @media (max-width: 640px) {
+      #roster { width: 160px; } #hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="scene"></canvas>
+  <div id="bubbles"></div>
+
+  <div id="hud" class="panel">
+    <div id="clock">台北 --:--</div>
+    <div id="phase"></div>
+    <div id="source"></div>
+    <div id="fps"></div>
+  </div>
+
+  <div id="roster" class="panel">
+    <h2>成員</h2>
+    <div id="roster-list"></div>
+  </div>
+
+  <div id="card" class="panel">
+    <button id="card-close" aria-label="關閉">×</button>
+    <div id="card-name"></div>
+    <div id="card-role"></div>
+    <span id="card-status"></span>
+    <dl>
+      <dt>目前在做</dt><dd id="card-doing"></dd>
+      <dt>下一個排程</dt><dd id="card-next"></dd>
+    </dl>
+  </div>
+
+  <div id="hint" class="panel">左鍵拖曳旋轉・右鍵拖曳平移・滾輪縮放・點人物看名牌</div>
+  <div id="loading">辦公室載入中…</div>
+
+  <!-- 一般 script（不是 module），雙擊 index.html 用 file:// 開也能載入 -->
+  <script src="js/team.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/status-default.js"></script>
+  <script src="js/kit.js"></script>
+  <script src="js/characters.js"></script>
+  <script src="js/world.js"></script>
+  <script src="js/lighting.js"></script>
+  <script src="js/behavior.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

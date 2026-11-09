@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10 02:38",
+  "generatedAt": "2026-11-10 02:44",
   "note": "token 數含快取讀取；7 天＝產生時間往前 7×24 小時；今天＝台北時間 0 點起",
   "gpt": {
     "label": "GPT",
@@ -27,12 +27,12 @@
   "claude": {
     "label": "Claude",
     "source": "Claude Code 本機紀錄",
-    "asOf": "2026-11-10 02:37",
+    "asOf": "2026-11-10 02:42",
     "limits": null,
-    "tokensToday": 1381080,
-    "tokens7d": 654167002,
-    "output7d": 2670309,
-    "calls7d": 2641
+    "tokensToday": 2865577,
+    "tokens7d": 655651499,
+    "output7d": 2694228,
+    "calls7d": 2649
   },
   "grok": {
     "label": "Grok",

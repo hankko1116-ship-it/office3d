@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-11 13:22",
+  "generatedAt": "2026-11-11 15:03",
   "note": "token 數含快取讀取；7 天＝產生時間往前 7×24 小時；今天＝台北時間 0 點起",
   "gpt": {
     "label": "GPT",
@@ -21,18 +21,18 @@
       }
     },
     "tokensToday": 7189668,
-    "tokens7d": 13312914,
-    "calls7d": 173
+    "tokens7d": 12675476,
+    "calls7d": 157
   },
   "claude": {
     "label": "Claude",
     "source": "Claude Code 本機紀錄",
-    "asOf": "2026-11-11 14:39",
+    "asOf": "2026-11-11 15:03",
     "limits": null,
-    "tokensToday": 67000042,
-    "tokens7d": 744845404,
-    "output7d": 3095559,
-    "calls7d": 3073
+    "tokensToday": 70592569,
+    "tokens7d": 737851284,
+    "output7d": 3088549,
+    "calls7d": 3033
   },
   "grok": {
     "label": "Grok",
@@ -46,7 +46,7 @@
         "resetsAt": "2026-11-11 14:05",
         "sharedWithOtherApps": true,
         "note": "每週上限與方案裡的其他應用共用，不是只有 Grok Bot",
-        "resetPassed": false
+        "resetPassed": true
       }
     },
     "grokBotShareOfUsedPercent": 82.6,

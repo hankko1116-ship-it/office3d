@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-11 21:30",
+  "generatedAt": "2026-11-11 21:37",
   "note": "token 數含快取讀取；7 天＝產生時間往前 7×24 小時；今天＝台北時間 0 點起",
   "gpt": {
     "label": "GPT",
@@ -17,7 +17,7 @@
         "usedPercent": 14.0,
         "windowMinutes": 10080,
         "resetsAt": "2026-11-11 21:32",
-        "resetPassed": false
+        "resetPassed": true
       }
     },
     "tokensToday": 7189668,

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-12 10:25",
+  "generatedAt": "2026-11-12 10:31",
   "note": "token 數含快取讀取；7 天＝產生時間往前 7×24 小時；今天＝台北時間 0 點起",
   "gpt": {
     "label": "GPT",
@@ -30,9 +30,9 @@
     "asOf": "2026-11-11 19:56",
     "limits": null,
     "tokensToday": 0,
-    "tokens7d": 714910647,
-    "output7d": 2537090,
-    "calls7d": 2814
+    "tokens7d": 708489128,
+    "output7d": 2511517,
+    "calls7d": 2795
   },
   "grok": {
     "label": "Grok",
